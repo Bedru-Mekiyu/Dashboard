@@ -1,0 +1,33 @@
+
+.container-div{
+margin-left: 20px;
+/* padding: 20px; */
+}
+.form-button{
+  background-color: rgb(0,123,255);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  display: block;
+  margin-top: 10px;
+  color: white;
+}
+.input-form{
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.input-password{
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+
+}
+
+.login-button{
+  margin-right: 10px;
+  
+}
