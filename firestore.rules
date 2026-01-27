@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // 1. Administrators Collection
+    // Allow read/write to authenticated users to bootstrap the admin system.
+    match /admins/{userId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // 2. Core Data: Batches (Versions) & Developers
+    match /batches/{batchId} {
+      allow read, write: if isAuthenticated();
+    }
+    
+    match /developers/{developerId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // 3. Modules: Invoicing, Agreements, Events, Outreach
+    match /invoices/{invoiceId} {
+      allow read, write: if isAuthenticated();
+    }
+    
+    match /agreements/{agreementId} {
+      allow read, write: if isAuthenticated();
+    }
+    
+    match /events/{eventId} {
+      allow read, write: if isAuthenticated();
+    }
+    
+    match /campaigns/{campaignId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // 4. Settings & Registry
+    match /settings/{document=**} {
+      allow read, write: if isAuthenticated();
+    }
+    
+    // Fallback: Allow authenticated access to any other collections
+    // This ensures new features don't immediately break due to missing rules
+    match /{document=**} {
+      allow read, write: if isAuthenticated();
+    }
+  }
+}
